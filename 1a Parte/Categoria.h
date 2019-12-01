@@ -16,5 +16,4 @@ public:
     Categoria();
 };
 
-
 #endif // CATEGORIA_H_INCLUDED
