@@ -105,7 +105,6 @@ void UsuarioComum::imprimeSeguidor(ofstream &o)
 }
 void UsuarioComum::carregaArquivo(ifstream &arqRed)
 {
-    Usuario *u;
     string tipo,urlll;
     int n,w,d,m,a,opa;
     getline(arqRed, this->nome);
@@ -147,7 +146,7 @@ void UsuarioComum::carregaArquivo(ifstream &arqRed)
             seguidores.push_back(u);
         }
     }
-    arqRed >> w; // numero de publicacoes
+    arqRed >> w; //número de publicações
     arqRed.ignore();
     for(int i=0;i<w;i++)
     {
@@ -182,11 +181,80 @@ void UsuarioComum::carregaSeguidor(ifstream &arqRed)
     this->setUrlFoto(urlll);
     cout << "Seguidor " << this->nome << " do usuário comum carregado com sucesso!" << endl;
 }
-void imprimeNoHtmlPerfil(ofstream &o)
+void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
 {
-
+    o << "<div id=\"divBody\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12 text-center\">" << endl;
+    o << "<h2>" << this->nome << " (Usuário Comum)</h2>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"perfil\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Perfil</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"sobre\">" << endl;
+    o << "<h4>" << this->id << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->genero << "</h4>" << endl;
+    o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
+    o << "<h4>" << this->formacao << "</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"publicacoes\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Publicações</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    if(this->publicacoes.empty())
+    {
+        o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhuma publicação até o momento!</h4>" << endl;
+    }
+    for(int i=0;i<this->publicacoes.size();i++)
+    {
+        this->publicacoes[i]->imprimirNoHtml(o);
+    }
+    o << "</div>" << endl;
+    o << "<div id=\"seguidores\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Seguidores</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    if(this->seguidores.empty())
+    {
+        o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor até o momento!</h4>" << endl;
+    }
+    for(int i=0;i<this->seguidores.size();i++)
+    {
+        this->seguidores[i]->imprimeNoHtmlSeguidor(o);
+    }
+    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
 }
-void imprimeNoHtmlSeguidor(ofstream &o)
+void UsuarioComum::imprimeNoHtmlSeguidor(ofstream &o)
 {
-
+    o << "<div id=\"card\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div id=\"divImage\">" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"info\">" << endl;
+    o << "<h4>" << this->id << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->genero << "</h4>" << endl;
+    o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
+    o << "<h4>" << this->formacao << "</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
 }

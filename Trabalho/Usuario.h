@@ -43,8 +43,8 @@ public:
     virtual void imprimeSeguidor(ofstream &o) = 0;
     virtual void carregaArquivo(ifstream &arqRed) = 0;
     virtual void carregaSeguidor(ifstream &arqRed) = 0;
-    virtual void imprimirNoHtmlPerfil() = 0;
-    virtual void imprimirNoHtmlSeguidor() = 0;
+    virtual void imprimeNoHtmlPerfil(ofstream &o) = 0;
+    virtual void imprimeNoHtmlSeguidor(ofstream &o) = 0;
 };
 
 #endif // USUARIO_H_INCLUDED

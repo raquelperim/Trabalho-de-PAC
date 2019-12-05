@@ -21,7 +21,6 @@ vector<RedeSocial*> carregarDadosRedesSociais(ifstream &arqRede)
     Usuario::qtdUsuarios=0;
     int i,x;
     arqRede >> x;
-    cout << "A quantidade de redes sociais eh: "<< x <<endl;
     RedeSocial* p;
     for(i=0; i<x; i++)
     {

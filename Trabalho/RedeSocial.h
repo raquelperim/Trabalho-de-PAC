@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <cstdlib>
 #include "UsuarioComum.h"
-#include "Pagina.h"
 #include "Grupo.h"
 
 using namespace std;
@@ -46,6 +46,7 @@ public:
     void imprimirPublicacoes();
     void ImprimeNoArquivo(ofstream &o);
     void carregaArquivo(ifstream &arqRede);
+    const char* trans(string s_);
     void exportarRedeSocial();
 };
 

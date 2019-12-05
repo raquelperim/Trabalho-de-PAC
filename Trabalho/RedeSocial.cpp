@@ -7,23 +7,23 @@ RedeSocial::RedeSocial(string n)
 {
     nome=n;
 }
-bool RedeSocial::datainvalida(tm data) // vê se a data digitada existe
+bool RedeSocial::datainvalida(tm data)
 {
     int d,m,a;
     d=data.tm_mday;
-    m=data.tm_mon +1;
+    m=data.tm_mon+1;
     a=data.tm_year+1900;
     if(d<1 || m<1)
     {
         return 1;
     }
-    if(a>2019 || a<0||d>31 || d<1||m>12 || m<1)
+    if(a>2019 || a<0 || d>31 || d<1 || m>12 || m<1)
     {
         return 1;
     }
     else if(d>30)
     {
-        if(m==4 || m==7 || m== 9 || m==11)
+        if(m==4 || m==7 || m==9 || m==11)
         {
             return 1;
         }
@@ -44,7 +44,9 @@ bool RedeSocial::datainvalida(tm data) // vê se a data digitada existe
                 }
             }
             else
+            {
                 return 1;
+            }
         }
     }
     return 0;
@@ -53,7 +55,7 @@ void RedeSocial::criarUsuario()
 {
     int d,m,a,w,st,ops=0;
     tm data;
-    string c,n,id,s,f,url;
+    string c,n,id,s,f,url,ge;
     char g;
     Usuario *novo;
     cout << endl;
@@ -98,7 +100,7 @@ void RedeSocial::criarUsuario()
             }
             cout << "Digite sua data de nascimento: ";
             cin >> d;
-            cin.get(); // serve para apagar o '/' que a pessoa escreve
+            cin.get();
             cin >> m;
             cin.get();
             cin >> a;
@@ -108,10 +110,18 @@ void RedeSocial::criarUsuario()
         while(datainvalida(data));
         do
         {
-            cout << "Digite o gênero\nM - Masculino\nF - Feminino" <<endl;
+            cout << "Digite o gênero:\nM - Masculino\nF - Feminino" <<endl;
             cin >> g;
+//            if(g=="M" || g=="m")
+//            {
+//                g="Masculino";
+//            }
+//            else
+//            {
+//                g="Feminino";
+//            }
         }
-        while(g!= 'M' && g!= 'm' && g!= 'F' && g!= 'f');
+        while(g!='M' && g!='m' && g!='F' && g!='f');
         cout << "Digite sua formação: ";
         cin.ignore();
         getline(cin,f);
@@ -135,16 +145,16 @@ void RedeSocial::criarUsuario()
         cout << "Digite a url da imagem do usuário comum: ";
         cin.ignore();
         getline(cin, url);
-        novo= new UsuarioComum(n,id,data,url,g, f,UsuarioComum::StatusRelacionamento(st));
+        novo= new UsuarioComum(n,id,data,url,g,f,UsuarioComum::StatusRelacionamento(st));
         cout << endl;
     }
     if(usuarios.empty())
     {
-        cout << "Você foi o primeiro usuário a se cadastrar nessa rede social...\nMeio solitario neh\n\n";
+        cout << "Você foi o primeiro usuário a se cadastrar nessa rede social...\nMeio solitario né.....\n\n";
     }
     else
     {
-        cout<< "Cadastrado com sucesso\n\n";
+        cout<< "Usuário cadastrado com sucesso!\n\n";
     }
     usuarios.push_back(novo);
     Usuario::qtdUsuarios++;
@@ -171,7 +181,7 @@ int RedeSocial::selecionaUsuario()
 }
 void RedeSocial::seguirUsuario()
 {
-    if(usuarios.size() < 2)
+    if(usuarios.size()<2)
     {
         cout << "Não há pessoas disponíveis na sua região." << endl;
     }
@@ -280,9 +290,9 @@ void RedeSocial::criarGrupo()
     cout << "Digite o nome do grupo: ";
     cin.ignore();
     getline (cin,nomeG);
-    cout << "Digite a idade mínima de entrada para Usuários Comuns (em anos): ";
+    cout << "Digite a idade mínima de entrada para usuários uomuns (em anos): ";
     cin >> idademinA;
-    cout << "Digite a idade mínima de entrada para Páginas (em dias): ";
+    cout << "Digite a idade mínima de entrada para páginas (em dias): ";
     cin >> idademinD;
     cout << "Digite a categoria: ";
     cin.ignore();
@@ -408,7 +418,7 @@ void RedeSocial::imprimirGruposCadastrados(string s)
     }
     if(k==0)
     {
-        cout<< "Não há grupos nessa categoria\n";
+        cout<< "Não há grupos nessa categoria." << endl;
     }
 }
 void RedeSocial::imprimirGruposCadastrados()
@@ -439,7 +449,7 @@ void RedeSocial::imprimirAniversariantesMes()
         {
             cout << "Usuário " << i << endl;
             usuarios[i]->imprimeInfo();
-            cout << endl << "SEU ANIVERSARIO É NESSE MÊS EM!!!\n" <<endl;
+            cout << endl << "SEU ANIVERSÁRIO É NESSE MÊS EM!!!\n" <<endl;
             niver++;
         }
     }
@@ -453,7 +463,7 @@ void RedeSocial::imprimirPublicacoes()
     int i,j;
     if(usuarios.empty())
     {
-        cout << "Não existem usuários cadastrados portanto não existem publicações\n";
+        cout << "Não existem usuários cadastrados, portanto, não existem publicações." << endl;
     }
     for(i=0; i<usuarios.size(); i++)
     {
@@ -530,11 +540,26 @@ void RedeSocial::carregaArquivo(ifstream &arqRede)
     }
     cout << "Rede social " << this->nome << " carregada com sucesso!" << endl;
 }
-void RedeSocial::exportarRedeSocial(ofstream &o)
+//const char* trans(string s_)
+//{
+//    char* p_string;
+//    p_string = (char*)malloc((s_.size())*sizeof(char));
+//    for(int i=0; i<s_.size(); i++)
+//    {
+//        *(p_string+i) = s_[i];
+//    }
+//    return p_string;
+//}
+void RedeSocial::exportarRedeSocial()
 {
-	//código base html e css:
-	/*
-    o << "<html>" << endl;
+    ofstream o;
+//    string nom;
+//    nom= this->nome + ".html";
+//    const char* file_name = trans(nom);
+//    o.open(file_name);
+    o.open("nomeDaRede.html");
+    o << "<!DOCTYPE html>" << endl;
+    o << "<html lang=\"pt-BR\">" << endl;
     o << "<head>" << endl;
     o << "<meta charset=\"UTF-8\">" << endl;
     o << "<style>" << endl;
@@ -677,69 +702,22 @@ void RedeSocial::exportarRedeSocial(ofstream &o)
     o << "adding: 7px 0;" << endl;
     o << "}" << endl;
     o << "</style>" << endl;
-    o << "<title>Beterraba</title>" << endl;
+    o << "<title>" << this->nome << "</title>" << endl;
     o << "</head>" << endl;
     o << "<body>" << endl;
     o << "<div id=\"bar\">" << endl;
-    o << "<h1>Beterraba</h1>" << endl;
+    o << "<h1>" << this->nome << "</h1>" << endl;
     o << "</div>" << endl;
-    o << "<div id=\"divBody\">" << endl;
-    o << "<div class=\"row\">" << endl;
-    o << "<div class=\"col-12 text-center\">" << endl;
-    o << "<h2>raquel (Usuario Comum)</h2>" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"perfil\">" << endl;
-    o << "<div class=\"row\">" << endl;
-    o << "<div class=\"col-12\">" << endl;
-    o << "<h3>Perfil</h3>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"https://statig1.akamaized.net/bancodeimagens/5i/6x/4l/5i6x4ly396q2ioenmxznv4zd3.jpg\" />" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"sobre\">" << endl;
-    o << "<h4>1</h4>" << endl;
-    o << "<h4>31/12/1999</h4>" << endl;
-    o << "<h4>Feminino</h4>" << endl;
-    o << "<h4>Solteiro</h4>" << endl;
-    o << "<h4>estudante</h4>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"publicacoes\">" << endl;
-    o << "<div class=\"row\">" << endl;
-    o << "<div class=\"col-12\">" << endl;
-    o << "<h3>Publicacoes</h3>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"card\">" << endl;
-    o << "<div class=\"row\">" << endl;
-    o << "<div id=\"divImage\">" << endl;
-    o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"https://thumbs.dreamstime.com/b/alpaca-branca-do-beb%C3%AA-que-dorme-em-sun-26797946.jpg\" />" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"info\">" << endl;
-    o << "<div>" << endl;
-    o << "<h3>4/12/2019</h3>" << endl;
-    o << "</div>" << endl;
-    o << "<h4>hihihi que fofinho adoro alpacas</h4>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<div id=\"seguidores\">" << endl;
-    o << "<div class=\"row\">" << endl;
-    o << "<div class=\"col-12\">" << endl;
-    o << "<h3>Seguidores</h3>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor ate o momento!</h4>" << endl;
+    for(int i=0; i<this->usuarios.size(); i++)
+    {
+        this->usuarios[i]->imprimeNoHtmlPerfil(o);
+    }
     o << "</div>" << endl;
     o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
     o << "</div>" << endl;
-    o << "</div>" << endl;
-    o << "</div>" << endl;
     o << "</body>" << endl;
     o << "</html>" << endl;
-	*/
+    o.close();
+//    cout << "O arquivo " << file_name << " foi criado com sucesso!" << endl;
+    cout << "O arquivo blablabla.html foi criado com sucesso!" << endl;
 }

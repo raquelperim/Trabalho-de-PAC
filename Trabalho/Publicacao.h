@@ -13,16 +13,18 @@ class Publicacao
 private:
     tm data;
     string conteudo;
+    string url;
 public:
     tm getData();
     void setData(tm data);
     string getConteudo();
     void setConteudo(string conteudo);
     Publicacao();
-    Publicacao(string a);
+    Publicacao(string a, string u);
     void imprimeInfo();
     void imprimeNoArquivo(ofstream &o);
     void carregaArquivo(ifstream &o);
+    void imprimirNoHtml(ofstream &o);
 };
 
 #endif // PUBLICACAO_H_INCLUDED

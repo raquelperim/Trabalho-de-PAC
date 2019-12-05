@@ -12,7 +12,7 @@ void Usuario::imprimirPublicacoes()
 {
     if(publicacoes.size()==0)
     {
-        //cout << "Não existe publicação cadastrada." << endl;   // Se ficar printando isso quando for printar todas as publicações fica aparecendo essa msg.
+        //cout << "Não existe publicação cadastrada." << endl;   //  Quando imprime todas as publicações, caso algum usuario não tenha(publicacoes), essa msg aparecerá
     }
     else
     {
@@ -23,7 +23,6 @@ void Usuario::imprimirPublicacoes()
             publicacoes[i]->imprimeInfo();
             cout << endl;
         }
-
     }
 }
 void Usuario::imprimirSeguidores()
@@ -59,7 +58,7 @@ void Usuario::novoSeguidor(Usuario* u)
         }
     }
     seguidores.push_back(u);
-    cout << "Um usuário agora está seguindo o outro." << endl;
+    cout << "O usuário " << u->id << " agora está seguindo " << this->id << "." << endl;
 }
 void Usuario::removerSeguidor()
 {
@@ -73,18 +72,21 @@ void Usuario::removerSeguidor()
             cin >> pos;
         }
         while (pos<0 || pos>=this->seguidores.size());
+        cout << "O usuário " << seguidores[pos]->id << " deixou de seguir " << this->id << " com sucesso." << endl;
         seguidores.erase(seguidores.begin()+pos);
-        cout << "Um usuário deixou de seguir o outro com sucesso." << endl;
     }
 }
 void Usuario::criarPublicacao()
 {
     Publicacao* p;
     cout << "Informe o conteúdo da publicação: ";
-    string s;
+    string s,u;
     cin.ignore();
     getline(cin,s);
-    p= new Publicacao(s);
+    cout << "Informe a url da publicação: ";
+    cin.ignore();
+    getline(cin,u);
+    p= new Publicacao(s,u);
     publicacoes.push_back(p);
     cout << "Publicação criada com sucesso!\n";
 }
@@ -107,7 +109,7 @@ void Usuario::editarPublicacao()
     cin.ignore();
     getline(cin,s);
 marca:
-    cout << "Deseja alterar o conteúdo da publicação mesmo?\n1.Sim\n2.Não" << endl;
+    cout << "Deseja mesmo alterar o conteúdo da publicação???\n1.Sim\n2.Não" << endl;
     cin >> he;
     if(he==1)
     {

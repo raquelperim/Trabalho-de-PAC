@@ -27,7 +27,7 @@ void Grupo::adicionarParticipante(Usuario* usuario)
     {
         if(participantes[i]->getId() == usuario->getId())
         {
-            cout << "Você já está neste grupo." << endl;
+            cout << "Você já está nesse grupo." << endl;
             return;
         }
     }
@@ -146,14 +146,14 @@ void Grupo::carregaArquivo(ifstream &arqRed)
     arqRed.ignore();
     if(tipo=="P")
     {
-        Usuario* u;
+        Pagina* u;
         u = new Pagina();
         u->carregaSeguidor(arqRed);
         this->setAdministrador(u);
     }
     else
     {
-        Usuario* u;
+        UsuarioComum* u;
         u = new UsuarioComum();
         u->carregaSeguidor(arqRed);
         this->setAdministrador(u);
@@ -164,14 +164,14 @@ void Grupo::carregaArquivo(ifstream &arqRed)
         arqRed.ignore();
         if(tipo=="P")
         {
-            Usuario* u;
+            Pagina* u;
             u = new Pagina();
             participantes.push_back(u);
             participantes[i]->carregaSeguidor(arqRed);
         }
         else
         {
-            Usuario* u;
+            UsuarioComum* u;
             u = new UsuarioComum();
             participantes.push_back(u);
             participantes[i]->carregaSeguidor(arqRed);

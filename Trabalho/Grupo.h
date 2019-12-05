@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 #include "Categoria.h"
-#include "Usuario.h"
+#include "Pagina.h"
+#include "UsuarioComum.h"
 
 using namespace std;
 class Grupo

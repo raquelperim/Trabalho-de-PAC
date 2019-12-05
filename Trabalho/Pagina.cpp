@@ -4,7 +4,7 @@ Pagina::Pagina():Usuario()
 {
     this->categoria= new Categoria();
 }
-Pagina::Pagina(string nome, string id, tm data,string u, string c, string s):Usuario(nome, id, data,u)
+Pagina::Pagina(string nome, string id, tm data, string u, string c, string s):Usuario(nome, id, data, u)
 {
     categoria= new Categoria(c);
     sobre=s;
@@ -152,13 +152,80 @@ void Pagina::carregaSeguidor(ifstream &arqRed)
     arqRed >> urlll;
     arqRed.ignore();
     this->setUrlFoto(urlll);
-    cout << "Seguidor " << this->nome << " da página carregado com sucesso!" << endl;
+    cout << "Seguidor " << this->nome << " carregado com sucesso!" << endl;
 }
 void Pagina::imprimeNoHtmlPerfil(ofstream &o)
 {
-
+    o << "<div id=\"divBody\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12 text-center\">" << endl;
+    o << "<h2>" << this->nome << " (Página)</h2>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"perfil\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Perfil</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"sobre\">" << endl;
+    o << "<h4>" << this->id << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->categoria->getNome() << "</h4>" << endl;
+    o << "<h4>" << this->sobre << "</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"publicacoes\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Publicações</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    if(this->publicacoes.empty())
+    {
+        o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhuma publicação até o momento!</h4>" << endl;
+    }
+    for(int i=0;i<this->publicacoes.size();i++)
+    {
+        this->publicacoes[i]->imprimirNoHtml(o);
+    }
+    o << "</div>" << endl;
+    o << "<div id=\"seguidores\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Seguidores</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    if(this->seguidores.empty())
+    {
+        o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor até o momento!</h4>" << endl;
+    }
+    for(int i=0;i<this->seguidores.size();i++)
+    {
+        this->seguidores[i]->imprimeNoHtmlSeguidor(o);
+    }
+    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
 }
 void Pagina::imprimeNoHtmlSeguidor(ofstream &o)
 {
-
+    o << "<div id=\"card\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div id=\"divImage\">" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"info\">" << endl;
+    o << "<h4>" << this->id << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->categoria << "</h4>" << endl;
+    o << "<h4>" << this->sobre << "</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
 }

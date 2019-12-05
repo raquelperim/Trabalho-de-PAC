@@ -41,11 +41,9 @@ int selecionaRedeSocial (vector <RedeSocial*> redesSociais)
         for(i=0; i<redesSociais.size(); i++)
         {
             cout<< "Rede Social " << i << ":" << endl;
-            cout << redesSociais[i]->nome << endl;
-            cout << endl;
+            cout << redesSociais[i]->nome << endl << endl;
         }
         cin >> i;
-        cout << endl;
     }
     while (i<0 || i>= redesSociais.size());
     return i;
