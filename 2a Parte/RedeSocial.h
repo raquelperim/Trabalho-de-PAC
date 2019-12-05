@@ -5,11 +5,10 @@
 #include <fstream>
 #include <ctime>
 #include "UsuarioComum.h"
-#include "Pagina.h" // ta incluido publicação
-#include "Grupo.h" // ta incluido categoria
+#include "Pagina.h"
+#include "Grupo.h"
 
 using namespace std;
-
 class RedeSocial
 {
 private:

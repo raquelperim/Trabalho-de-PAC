@@ -1,6 +1,11 @@
 #include "Grupo.h"
+#include "Pagina.h"
+#include "UsuarioComum.h"
 
-Grupo::Grupo() {}
+Grupo::Grupo()
+{
+    this->categoria= new Categoria();
+}
 Grupo::Grupo(string n, int ida, int pag, string c, Usuario* a)
 {
     nome=n;
@@ -8,7 +13,6 @@ Grupo::Grupo(string n, int ida, int pag, string c, Usuario* a)
     idadeMinPaginaDias=pag;
     categoria= new Categoria(c);
     adm=a;
-    participantes.push_back(adm);
 }
 void Grupo::adicionarParticipante(Usuario* usuario)
 {
@@ -111,4 +115,66 @@ void Grupo::setAdministrador(Usuario* adm)
 vector<Usuario*> Grupo::getParticipantes()
 {
     return this->participantes;
+}
+void Grupo::imprimeNoArquivo(ofstream &o)
+{
+    o << participantes.size() << endl;
+    o << this->nome << endl;
+    o << this->idadeMinUsuarioAnos << endl;
+    o << this->idadeMinPaginaDias << endl;
+    o << this->categoria->getNome() << endl;
+    this->adm->imprimeSeguidor(o);
+    for(int i=0; i<participantes.size(); i++)
+    {
+        participantes[i]->imprimeSeguidor(o);
+    }
+}
+void Grupo::carregaArquivo(ifstream &arqRed)
+{
+    string tipo,ops;
+    int part;
+    arqRed >> part; // quantidade de participantes
+    arqRed.ignore();
+    getline(arqRed, this->nome);
+    arqRed >> this->idadeMinUsuarioAnos;
+    arqRed.ignore();
+    arqRed >> this->idadeMinPaginaDias;
+    arqRed.ignore();
+    getline(arqRed,ops);
+    this->categoria->setNome(ops);
+    arqRed >> tipo;
+    arqRed.ignore();
+    if(tipo=="P")
+    {
+        Usuario* u;
+        u = new Pagina();
+        u->carregaSeguidor(arqRed);
+        this->setAdministrador(u);
+    }
+    else
+    {
+        Usuario* u;
+        u = new UsuarioComum();
+        u->carregaSeguidor(arqRed);
+        this->setAdministrador(u);
+    }
+    for(int i=0; i<part; i++)
+    {
+        arqRed >> tipo;
+        arqRed.ignore();
+        if(tipo=="P")
+        {
+            Usuario* u;
+            u = new Pagina();
+            participantes.push_back(u);
+            participantes[i]->carregaSeguidor(arqRed);
+        }
+        else
+        {
+            Usuario* u;
+            u = new UsuarioComum();
+            participantes.push_back(u);
+            participantes[i]->carregaSeguidor(arqRed);
+        }
+    }
 }

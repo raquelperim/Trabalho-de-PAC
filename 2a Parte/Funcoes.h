@@ -4,11 +4,9 @@
 #include <vector>
 #include <iostream>
 #include <locale.h>
-
 #include "RedeSocial.h"
 
 using namespace std;
-
 void menu();
 int selecionaRedeSocial (vector <RedeSocial*> redesSociais);
 

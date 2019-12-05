@@ -1,5 +1,6 @@
 #ifndef GRUPO_H_INCLUDED
 #define GRUPO_H_INCLUDED
+
 #include <iostream>
 #include <ctime>
 #include <string>
@@ -8,7 +9,6 @@
 #include "Usuario.h"
 
 using namespace std;
-
 class Grupo
 {
 private:
@@ -35,5 +35,8 @@ public:
     void imprimeInfo ();
     void imprimirParticipantes();
     void removerParticipante();
+    void imprimeNoArquivo(ofstream &o);
+    void carregaArquivo(ifstream &o);
 };
+
 #endif // GRUPO_H_INCLUDED

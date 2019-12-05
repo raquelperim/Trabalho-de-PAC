@@ -53,7 +53,7 @@ void RedeSocial::criarUsuario()
 {
     int d,m,a,w,st,ops=0;
     tm data;
-    string c,n,id,s,f;
+    string c,n,id,s,f,url;
     char g;
     Usuario *novo;
     cout << endl;
@@ -78,9 +78,10 @@ void RedeSocial::criarUsuario()
         cin.ignore();
         getline(cin, c);
         cout << "Escreva sobre a página: ";
-        cin.ignore();
         getline(cin, s);
-        novo= new Pagina(n,id,data,c,s);
+        cout << "Digite a url da imagem da página: ";
+        getline(cin, url);
+        novo = new Pagina(n,id,data,url,c,s);
         cout << endl;
     }
     else if(w==2)
@@ -131,12 +132,19 @@ void RedeSocial::criarUsuario()
         {
             f= "Lorde Vampiro";
         }
-        novo= new UsuarioComum(n,id,data,g, f,UsuarioComum::StatusRelacionamento(st));
+        cout << "Digite a url da imagem do usuário comum: ";
+        cin.ignore();
+        getline(cin, url);
+        novo= new UsuarioComum(n,id,data,url,g, f,UsuarioComum::StatusRelacionamento(st));
         cout << endl;
     }
     if(usuarios.empty())
     {
         cout << "Você foi o primeiro usuário a se cadastrar nessa rede social...\nMeio solitario neh\n\n";
+    }
+    else
+    {
+        cout<< "Cadastrado com sucesso\n\n";
     }
     usuarios.push_back(novo);
     Usuario::qtdUsuarios++;
@@ -383,7 +391,7 @@ void RedeSocial::imprimirUsuariosCadastrados()
 }
 void RedeSocial::imprimirGruposCadastrados(string s)
 {
-    int i;
+    int i,k=0;
     if(grupos.size() == 0)
     {
         cout << "Não há grupos cadastrados." << endl;
@@ -394,8 +402,13 @@ void RedeSocial::imprimirGruposCadastrados(string s)
         if(grupos[i]->getCategoria()->getNome() == s)
         {
             grupos[i]->imprimeInfo();
+            k++;
             cout << endl;
         }
+    }
+    if(k==0)
+    {
+        cout<< "Não há grupos nessa categoria\n";
     }
 }
 void RedeSocial::imprimirGruposCadastrados()
@@ -426,18 +439,22 @@ void RedeSocial::imprimirAniversariantesMes()
         {
             cout << "Usuário " << i << endl;
             usuarios[i]->imprimeInfo();
-            cout << endl << "SEU ANIVERSARIO É NESSE MES EM!!!\n" <<endl;
+            cout << endl << "SEU ANIVERSARIO É NESSE MÊS EM!!!\n" <<endl;
             niver++;
         }
     }
     if(niver==0)
     {
-        cout <<  "Não existem usuarios que farão aniversario nesse mes\n" <<endl;
+        cout <<  "Não existem usuários que fazem aniversário nesse mês\n" <<endl;
     }
 }
 void RedeSocial::imprimirPublicacoes()
 {
     int i,j;
+    if(usuarios.empty())
+    {
+        cout << "Não existem usuários cadastrados portanto não existem publicações\n";
+    }
     for(i=0; i<usuarios.size(); i++)
     {
         usuarios[i]->imprimirPublicacoes();
@@ -459,61 +476,270 @@ vector<Grupo*> RedeSocial::getGrupos()
 {
     return this->grupos;
 }
-
 void RedeSocial::ImprimeNoArquivo(ofstream &o)
 {
-    o.open("RedesSociais.txt");
     o << this->nome << endl;
     o << this->usuarios.size() << endl;
     for(int i=0; i<this->usuarios.size(); i++)
     {
-        usuarios[i]->ImprimeNoArquivo(o);
+        usuarios[i]->imprimeNoArquivo(o);
     }
     o << this->grupos.size() << endl;
     for(int j=0; j<this->grupos.size(); j++)
     {
-        grupos[j]->ImprimeNoArquivo(o);
+        grupos[j]->imprimeNoArquivo(o);
     }
-    o.close();
     cout << "Rede social " << this->nome << " salva com sucesso!" << endl;
 }
-
 void RedeSocial::carregaArquivo(ifstream &arqRede)
 {
-    arqRede.open("RedesSociais.txt");
-    arqRede >> this->nome >> endl;
+    arqRede >> this->nome;
+    arqRede.ignore();
     int x,y;
-    arqRede >> x >> endl;
+    string tipo;
+    arqRede >> x;
+    arqRede.ignore();
     Usuario::qtdUsuarios+=x;
-    Usuario* u;
-    Grupo* g;
     for(int i=0; i<x; i++)
     {
-        if(...)
+        arqRede >> tipo;
+        arqRede.ignore();
+        if(tipo=="P")
         {
+            Usuario* u;
             u = new Pagina();
-            usuarios[i]->carregaArquivo(arqRede);
             usuarios.push_back(u);
+            usuarios[i]->carregaArquivo(arqRede);
         }
         else
         {
+            Usuario* u;
             u = new UsuarioComum();
-            usuarios[i]->carregaArquivo(arqRede);
             usuarios.push_back(u);
+            usuarios[i]->carregaArquivo(arqRede);
         }
     }
-    arqRede >> y >> endl;
+    arqRede >> y;
+    arqRede.ignore();
     for(int i=0; i<y; i++)
     {
+        Grupo* g;
         g = new Grupo();
-        grupos[i]->carregaArquivo(arqRede);
         grupos.push_back(g);
+        grupos[i]->carregaArquivo(arqRede);
     }
-    arqRede.close();
     cout << "Rede social " << this->nome << " carregada com sucesso!" << endl;
 }
-
-void RedeSocial::exportarRedeSocial()
+void RedeSocial::exportarRedeSocial(ofstream &o)
 {
-
+	//código base html e css:
+	/*
+    o << "<html>" << endl;
+    o << "<head>" << endl;
+    o << "<meta charset=\"UTF-8\">" << endl;
+    o << "<style>" << endl;
+    o << "body {" << endl;
+    o << "background-color: rgb(245, 245, 245);" << endl;
+    o << "font-family: 'Roboto', sans-serif;" << endl;
+    o << "margin: 0;" << endl;
+    o << "}" << endl;
+    o << "#divBody {" << endl;
+    o << "justify-content: center;" << endl;
+    o << "margin:auto;" << endl;
+    o << "align-items: center;" << endl;
+    o << "width: 1400px;" << endl;
+    o << "overflow-x: scroll;" << endl;
+    o << "}" << endl;
+    o << "#bar {" << endl;
+    o << "height: 50px;" << endl;
+    o << "background: #4267b2;" << endl;
+    o << "text-align: center;" << endl;
+    o << "}" << endl;
+    o << "#perfil {" << endl;
+    o << "width: 300px;" << endl;
+    o << "}" << endl;
+    o << "#perfil #sobre {" << endl;
+    o << "text-align: left;" << endl;
+    o << "color: rgba(0, 0, 0, .8);" << endl;
+    o << "background-color: rgb(252, 252, 252);" << endl;
+    o << "border: 1px solid rgb(220, 220, 220);" << endl;
+    o << "margin-left: 19px;" << endl;
+    o << "width: calc(300px - 40px);" << endl;
+    o << "}" << endl;
+    o << "#publicacoes {" << endl;
+    o << "width: 500px;" << endl;
+    o << "margin: 0 auto;" << endl;
+    o << "}" << endl;
+    o << "#seguidores {" << endl;
+    o << "width: 500px;" << endl;
+    o << "margin: 0 auto;" << endl;
+    o << "}" << endl;
+    o << "h1 {" << endl;
+    o << "color: white;" << endl;
+    o << "padding-top: 10px;" << endl;
+    o << "font-size: 26px;" << endl;
+    o << "}" << endl;
+    o << "h2 {" << endl;
+    o << "font-size: 20px;" << endl;
+    o << "margin: 30px auto 10px auto;" << endl;
+    o << "color: rgba(0, 0, 0, .8);" << endl;
+    o << "}" << endl;
+    o << "h3 {" << endl;
+    o << "font-size: 18px;" << endl;
+    o << "margin-left: 20px;" << endl;
+    o << "float: left;" << endl;
+    o << "color: rgba(0, 0, 0, .8);" << endl;
+    o << "}" << endl;
+    o << "h4 {" << endl;
+    o << "font-size: 15px;" << endl;
+    o << "color: rgba(0, 0, 0, .75);" << endl;
+    o << "margin: 10px;" << endl;
+    o << "font-weight: 400;" << endl;
+    o << "}" << endl;
+    o << ".text-center {" << endl;
+    o << "text-align: center;" << endl;
+    o << "}" << endl;
+    o << ".row {" << endl;
+    o << "width: 100%;" << endl;
+    o << "display: flex;" << endl;
+    o << "flex-wrap: wrap;" << endl;
+    o << "margin-left: 0;" << endl;
+    o << "margin-right: 0;" << endl;
+    o << "}" << endl;
+    o << ".col-12 {" << endl;
+    o << "width: 100%;" << endl;
+    o << "}" << endl;
+    o << "#perfil .bg-img{" << endl;
+    o << "text-align: center;" << endl;
+    o << "}" << endl;
+    o << "#perfil .bg-img img, #seguidores .bg-img img {" << endl;
+    o << "border: 1px solid rgb(200, 200, 200);" << endl;
+    o << "width: calc(300px - 40px);" << endl;
+    o << "}" << endl;
+    o << "#card {" << endl;
+    o << "display: table;" << endl;
+    o << "margin: auto;" << endl;
+    o << "}" << endl;
+    o << "#card .row {" << endl;
+    o << "margin-bottom: 20px;" << endl;
+    o << "}" << endl;
+    o << "#card .bg-img{" << endl;
+    o << "background-position: center;" << endl;
+    o << "background-size: cover;" << endl;
+    o << "background-repeat: no-repeat;" << endl;
+    o << "position: relative;" << endl;
+    o << "height: 100%;" << endl;
+    o << "}" << endl;
+    o << "#card .bg-img img{" << endl;
+    o << "background-color: white;" << endl;
+    o << "height: 100%;" << endl;
+    o << "width: 100%;" << endl;
+    o << "border: 1px solid rgb(220, 220, 220);" << endl;
+    o << "}" << endl;
+    o << "#card #divImage{" << endl;
+    o << "position: relative;" << endl;
+    o << "float: left;" << endl;
+    o << "}" << endl;
+    o << "#publicacoes #card #divImage{" << endl;
+    o << "width: 220px;" << endl;
+    o << "height: 180px;" << endl;
+    o << "}" << endl;
+    o << "#seguidores #card #divImage{" << endl;
+    o << "width: 220px;" << endl;
+    o << "height: 210px;" << endl;
+    o << "}" << endl;
+    o << "#card h3{" << endl;
+    o << "color: rgba(0,0,0,0.7);" << endl;
+    o << "font-size: 17px;" << endl;
+    o << "margin: 10px;" << endl;
+    o << "padding-bottom: 5px;" << endl;
+    o << "border-bottom: 1px solid lightgray;" << endl;
+    o << "width: calc(100% - 20px);" << endl;
+    o << "}" << endl;
+    o << "#card #info{" << endl;
+    o << "border: 1px solid rgb(220, 220, 220);" << endl;
+    o << "background-color: white;" << endl;
+    o << "position: relative;" << endl;
+    o << "float: left;" << endl;
+    o << "}" << endl;
+    o << "#publicacoes #card #info{" << endl;
+    o << "width: 275px;" << endl;
+    o << "height: 180px;" << endl;
+    o << "}" << endl;
+    o << "#seguidores #card #info{" << endl;
+    o << "width: 275px;" << endl;
+    o << "height: 210px;" << endl;
+    o << "}" << endl;
+    o << "#card .info h4{" << endl;
+    o << "color: black;" << endl;
+    o << "font-size: 16px;" << endl;
+    o << "line-height: 1em;" << endl;
+    o << "adding: 7px 0;" << endl;
+    o << "}" << endl;
+    o << "</style>" << endl;
+    o << "<title>Beterraba</title>" << endl;
+    o << "</head>" << endl;
+    o << "<body>" << endl;
+    o << "<div id=\"bar\">" << endl;
+    o << "<h1>Beterraba</h1>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"divBody\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12 text-center\">" << endl;
+    o << "<h2>raquel (Usuario Comum)</h2>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"perfil\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Perfil</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"https://statig1.akamaized.net/bancodeimagens/5i/6x/4l/5i6x4ly396q2ioenmxznv4zd3.jpg\" />" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"sobre\">" << endl;
+    o << "<h4>1</h4>" << endl;
+    o << "<h4>31/12/1999</h4>" << endl;
+    o << "<h4>Feminino</h4>" << endl;
+    o << "<h4>Solteiro</h4>" << endl;
+    o << "<h4>estudante</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"publicacoes\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Publicacoes</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"card\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div id=\"divImage\">" << endl;
+    o << "<div class=\"bg-img\">" << endl;
+    o << "<img src=\"https://thumbs.dreamstime.com/b/alpaca-branca-do-beb%C3%AA-que-dorme-em-sun-26797946.jpg\" />" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"info\">" << endl;
+    o << "<div>" << endl;
+    o << "<h3>4/12/2019</h3>" << endl;
+    o << "</div>" << endl;
+    o << "<h4>hihihi que fofinho adoro alpacas</h4>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<div id=\"seguidores\">" << endl;
+    o << "<div class=\"row\">" << endl;
+    o << "<div class=\"col-12\">" << endl;
+    o << "<h3>Seguidores</h3>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor ate o momento!</h4>" << endl;
+    o << "</div>" << endl;
+    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</div>" << endl;
+    o << "</body>" << endl;
+    o << "</html>" << endl;
+	*/
 }

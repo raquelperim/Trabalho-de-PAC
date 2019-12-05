@@ -1,11 +1,12 @@
 #include "Usuario.h"
 
 Usuario::Usuario() {}
-Usuario::Usuario(string n, string c, tm dn)
+Usuario::Usuario(string n, string c, tm dn, string u)
 {
     nome=n;
     id=c;
     data=dn;
+    urlFoto=u;
 }
 void Usuario::imprimirPublicacoes()
 {
@@ -85,27 +86,51 @@ void Usuario::criarPublicacao()
     getline(cin,s);
     p= new Publicacao(s);
     publicacoes.push_back(p);
+    cout << "Publicação criada com sucesso!\n";
 }
 void Usuario::editarPublicacao()
 {
-    int pos;
+    int pos,he;
     string s;
     this->imprimirPublicacoes();
+    if(publicacoes.empty())
+    {
+        return;
+    }
     do
     {
         cout << "Informe a posição da publicação: ";
         cin >> pos;
     }
     while(pos<0 || pos>=this->publicacoes.size());
+    cout << "Digite o novo conteúdo da publicação: ";
     cin.ignore();
     getline(cin,s);
-    this->publicacoes[pos]->setConteudo(s);
-    cout << "Publicação editada com sucesso!" << endl;
+marca:
+    cout << "Deseja alterar o conteúdo da publicação mesmo?\n1.Sim\n2.Não" << endl;
+    cin >> he;
+    if(he==1)
+    {
+        this->publicacoes[pos]->setConteudo(s);
+        cout << "Publicação editada com sucesso!" << endl;
+    }
+    else if(he==2)
+    {
+        return;
+    }
+    else
+    {
+        goto marca;
+    }
 }
 void Usuario::excluirPublicacao()
 {
     int pos;
     this->imprimirPublicacoes();
+    if(publicacoes.empty())
+    {
+        return;
+    }
     do
     {
         cout << "Informe a posição da publicação: ";
@@ -142,6 +167,14 @@ tm Usuario::getData()
 void Usuario::setData(tm date)
 {
     this->data=date;
+}
+string Usuario::getUrlFoto()
+{
+    return this->urlFoto;
+}
+void Usuario::setUrlFoto(string url)
+{
+    this->urlFoto=url;
 }
 vector<Usuario*> Usuario::getSeguidores()
 {

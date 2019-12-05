@@ -1,4 +1,6 @@
 #include "Publicacao.h"
+
+Publicacao::Publicacao() {}
 Publicacao::Publicacao(string a)
 {
     conteudo=a;
@@ -26,4 +28,23 @@ string Publicacao::getConteudo()
 void Publicacao::setConteudo(string conteudo)
 {
     this->conteudo=conteudo;
+}
+void Publicacao::imprimeNoArquivo(ofstream &o)
+{
+    o<< this->conteudo << endl;
+    o << data.tm_mday << "/" << data.tm_mon+1 << "/" << data.tm_year+1900 << endl;
+    cout << "Publicação salva com sucesso!" << endl;
+}
+void Publicacao::carregaArquivo(ifstream &arqRed)
+{
+    int d,m,a;
+    getline(arqRed, this->conteudo);
+    arqRed >> d;
+    arqRed.ignore();
+    arqRed >> m;
+    arqRed.ignore();
+    arqRed >> a;
+    arqRed.ignore();
+    this->data= {0,0,0,d,m-1,a-1900};
+    cout << "Publicação carregada com sucesso!" << endl;
 }

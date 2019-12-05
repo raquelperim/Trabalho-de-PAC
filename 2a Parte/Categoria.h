@@ -2,9 +2,9 @@
 #define CATEGORIA_H_INCLUDED
 
 #include <string>
+#include <fstream>
 
 using namespace std;
-
 class Categoria
 {
 private:
