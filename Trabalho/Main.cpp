@@ -13,7 +13,7 @@ void salvarDadosRedesSociais(vector <RedeSocial*> redes)
         redes[i]->ImprimeNoArquivo(o);
     }
     o.close();
-    cout << "Arquivo com as Redes Sociais foi criado com sucesso!" << endl;
+    cout << "O arquivo com as redes sociais foi criado com sucesso!" << endl;
 }
 vector<RedeSocial*> carregarDadosRedesSociais(ifstream &arqRede)
 {
@@ -28,7 +28,7 @@ vector<RedeSocial*> carregarDadosRedesSociais(ifstream &arqRede)
         redesSociais.push_back(p);
         redesSociais[i]->carregaArquivo(arqRede);
     }
-    cout << "Todas as Redes Sociais foram carregadas com sucesso!" << endl;
+    cout << "Todas as redes sociais foram carregadas com sucesso!" << endl;
     return redesSociais;
 }
 int main()

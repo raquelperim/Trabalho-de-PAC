@@ -44,7 +44,7 @@ void Pagina::imprimeInfo()
 {
     cout << "Nome: " << nome << endl;
     cout << "ID: " << id << endl;
-    cout << "Data de nascimento: " << data.tm_mday << "/" << data.tm_mon +1 << "/" << data.tm_year+1900 << endl;
+    cout << "Data de nascimento: " << data.tm_mday << "/" << data.tm_mon+1 << "/" << data.tm_year+1900 << endl;
     cout << "Categoria: " << categoria->getNome() << endl;
     cout << "Sobre: " << sobre << endl;
 }
@@ -74,7 +74,7 @@ void Pagina::imprimeSeguidor(ofstream &o)
     o << "P" << endl;
     o << this->nome << endl;
     o << this->id << endl;
-    o << this->data.tm_mday <<"/" <<this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << endl;
+    o << this->data.tm_mday << "/" <<this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << endl;
     o << this->categoria->getNome() << endl;
     o << this->sobre << endl;
     o << this->getUrlFoto() << endl;
@@ -186,7 +186,7 @@ void Pagina::imprimeNoHtmlPerfil(ofstream &o)
     {
         o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhuma publicação até o momento!</h4>" << endl;
     }
-    for(int i=0;i<this->publicacoes.size();i++)
+    for(int i=0; i<this->publicacoes.size(); i++)
     {
         this->publicacoes[i]->imprimirNoHtml(o);
     }
@@ -201,7 +201,7 @@ void Pagina::imprimeNoHtmlPerfil(ofstream &o)
     {
         o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor até o momento!</h4>" << endl;
     }
-    for(int i=0;i<this->seguidores.size();i++)
+    for(int i=0; i<this->seguidores.size(); i++)
     {
         this->seguidores[i]->imprimeNoHtmlSeguidor(o);
     }

@@ -57,7 +57,7 @@ void RedeSocial::criarUsuario()
     tm data;
     string c,n,id,s,f,url,ge;
     char g;
-    Usuario *novo;
+    Usuario* novo;
     cout << endl;
     do
     {
@@ -112,14 +112,6 @@ void RedeSocial::criarUsuario()
         {
             cout << "Digite o gênero:\nM - Masculino\nF - Feminino" <<endl;
             cin >> g;
-//            if(g=="M" || g=="m")
-//            {
-//                g="Masculino";
-//            }
-//            else
-//            {
-//                g="Feminino";
-//            }
         }
         while(g!='M' && g!='m' && g!='F' && g!='f');
         cout << "Digite sua formação: ";
@@ -455,7 +447,7 @@ void RedeSocial::imprimirAniversariantesMes()
     }
     if(niver==0)
     {
-        cout <<  "Não existem usuários que fazem aniversário nesse mês\n" <<endl;
+        cout <<  "Não existem usuários que fazem aniversário nesse mês." <<endl;
     }
 }
 void RedeSocial::imprimirPublicacoes()

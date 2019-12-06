@@ -1,7 +1,7 @@
 #include "UsuarioComum.h"
 
 UsuarioComum::UsuarioComum():Usuario() {}
-UsuarioComum::UsuarioComum(string nome, string id, tm data, string u, char g , string f, StatusRelacionamento s):Usuario(nome, id, data,u)
+UsuarioComum::UsuarioComum(string nome, string id, tm data, string u, char g, string f, StatusRelacionamento s):Usuario(nome, id, data,u)
 {
     genero=g;
     formacao=f;
@@ -80,12 +80,12 @@ void UsuarioComum::imprimeNoArquivo(ofstream &o)
     o << this->status << endl;
     o << this->getUrlFoto()<< endl;
     o << seguidores.size() << endl;
-    for(int i=0;i<seguidores.size();i++)
+    for(int i=0; i<seguidores.size(); i++)
     {
         seguidores[i]->imprimeSeguidor(o);
     }
     o << publicacoes.size() << endl;
-    for(int i=0;i<publicacoes.size();i++)
+    for(int i=0; i<publicacoes.size(); i++)
     {
         publicacoes[i]->imprimeNoArquivo(o);
     }
@@ -115,7 +115,7 @@ void UsuarioComum::carregaArquivo(ifstream &arqRed)
     arqRed.ignore();
     arqRed >> a;
     arqRed.ignore();
-    this->data={0,0,0,d,m-1,a-1900};
+    this->data= {0,0,0,d,m-1,a-1900};
     arqRed >> this->genero;
     arqRed.ignore();
     getline(arqRed, this->formacao);
@@ -125,9 +125,9 @@ void UsuarioComum::carregaArquivo(ifstream &arqRed)
     arqRed >> urlll;
     arqRed.ignore();
     this->setUrlFoto(urlll);
-    arqRed >> n; //numero de seguidores
+    arqRed >> n; // número de seguidores
     arqRed.ignore();
-    for(int i=0;i<n;i++)
+    for(int i=0; i<n; i++)
     {
         arqRed >> tipo;
         arqRed.ignore();
@@ -146,9 +146,9 @@ void UsuarioComum::carregaArquivo(ifstream &arqRed)
             seguidores.push_back(u);
         }
     }
-    arqRed >> w; //número de publicações
+    arqRed >> w; // número de publicações
     arqRed.ignore();
-    for(int i=0;i<w;i++)
+    for(int i=0; i<w; i++)
     {
         Publicacao* p;
         p = new Publicacao();
@@ -199,10 +199,13 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     o << "<div id=\"sobre\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
     o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
-    if(this->genero == 'M'){
-        o << "<h4>MASCULINO</h4>" << endl;
-    } else {
-        o << "<h4>FEMININO</h4>" << endl;
+    if(this->genero == 'M' || this->genero == 'm')
+    {
+        o << "<h4>Masculino</h4>" << endl;
+    }
+    else
+    {
+        o << "<h4>Feminino</h4>" << endl;
     }
     o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
     o << "<h4>" << this->formacao << "</h4>" << endl;
@@ -218,7 +221,7 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     {
         o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhuma publicação até o momento!</h4>" << endl;
     }
-    for(int i=0;i<this->publicacoes.size();i++)
+    for(int i=0; i<this->publicacoes.size(); i++)
     {
         this->publicacoes[i]->imprimirNoHtml(o);
     }
@@ -233,7 +236,7 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     {
         o << "<h4 style=\"font-style: italic; text-decoration: underline;\"> Nenhum seguidor até o momento!</h4>" << endl;
     }
-    for(int i=0;i<this->seguidores.size();i++)
+    for(int i=0; i<this->seguidores.size(); i++)
     {
         this->seguidores[i]->imprimeNoHtmlSeguidor(o);
     }
@@ -252,10 +255,13 @@ void UsuarioComum::imprimeNoHtmlSeguidor(ofstream &o)
     o << "<div id=\"info\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
     o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
-    if(this->genero == 'M'){
-        o << "<h4>MASCULINO</h4>" << endl;
-    } else {
-        o << "<h4>FEMININO</h4>" << endl;
+    if(this->genero == 'M' || this->genero == 'm')
+    {
+        o << "<h4>Masculino</h4>" << endl;
+    }
+    else
+    {
+        o << "<h4>Feminino</h4>" << endl;
     }
     o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
     o << "<h4>" << this->formacao << "</h4>" << endl;
