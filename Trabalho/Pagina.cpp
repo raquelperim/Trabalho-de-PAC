@@ -156,7 +156,6 @@ void Pagina::carregaSeguidor(ifstream &arqRed)
 }
 void Pagina::imprimeNoHtmlPerfil(ofstream &o)
 {
-    o << "<div id=\"divBody\">" << endl;
     o << "<div class=\"row\">" << endl;
     o << "<div class=\"col-12 text-center\">" << endl;
     o << "<h2>" << this->nome << " (Página)</h2>" << endl;
@@ -206,8 +205,6 @@ void Pagina::imprimeNoHtmlPerfil(ofstream &o)
     {
         this->seguidores[i]->imprimeNoHtmlSeguidor(o);
     }
-    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
-    o << "</div>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
 }

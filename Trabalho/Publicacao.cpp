@@ -68,5 +68,4 @@ void Publicacao::imprimirNoHtml(ofstream &o)
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
-    o << "</div>" << endl;
 }

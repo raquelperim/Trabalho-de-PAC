@@ -540,24 +540,13 @@ void RedeSocial::carregaArquivo(ifstream &arqRede)
     }
     cout << "Rede social " << this->nome << " carregada com sucesso!" << endl;
 }
-//const char* trans(string s_)
-//{
-//    char* p_string;
-//    p_string = (char*)malloc((s_.size())*sizeof(char));
-//    for(int i=0; i<s_.size(); i++)
-//    {
-//        *(p_string+i) = s_[i];
-//    }
-//    return p_string;
-//}
+
 void RedeSocial::exportarRedeSocial()
 {
     ofstream o;
-//    string nom;
-//    nom= this->nome + ".html";
-//    const char* file_name = trans(nom);
-//    o.open(file_name);
-    o.open("nomeDaRede.html");
+    string nom;
+    nom= this->nome + ".html";
+    o.open(nom.c_str());
     o << "<!DOCTYPE html>" << endl;
     o << "<html lang=\"pt-BR\">" << endl;
     o << "<head>" << endl;
@@ -699,7 +688,7 @@ void RedeSocial::exportarRedeSocial()
     o << "color: black;" << endl;
     o << "font-size: 16px;" << endl;
     o << "line-height: 1em;" << endl;
-    o << "adding: 7px 0;" << endl;
+    o << "padding: 7px 0;" << endl;
     o << "}" << endl;
     o << "</style>" << endl;
     o << "<title>" << this->nome << "</title>" << endl;
@@ -708,16 +697,17 @@ void RedeSocial::exportarRedeSocial()
     o << "<div id=\"bar\">" << endl;
     o << "<h1>" << this->nome << "</h1>" << endl;
     o << "</div>" << endl;
+    o << "<div id=\"divBody\">" << endl;
     for(int i=0; i<this->usuarios.size(); i++)
     {
         this->usuarios[i]->imprimeNoHtmlPerfil(o);
+        o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
+        o << "</div>" << endl;
     }
     o << "</div>" << endl;
-    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
     o << "</div>" << endl;
     o << "</body>" << endl;
     o << "</html>" << endl;
     o.close();
-//    cout << "O arquivo " << file_name << " foi criado com sucesso!" << endl;
-    cout << "O arquivo blablabla.html foi criado com sucesso!" << endl;
+    cout << "O arquivo " << nom << " foi criado com sucesso!" << endl;
 }

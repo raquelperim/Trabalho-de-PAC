@@ -183,7 +183,6 @@ void UsuarioComum::carregaSeguidor(ifstream &arqRed)
 }
 void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
 {
-    o << "<div id=\"divBody\">" << endl;
     o << "<div class=\"row\">" << endl;
     o << "<div class=\"col-12 text-center\">" << endl;
     o << "<h2>" << this->nome << " (Usuário Comum)</h2>" << endl;
@@ -200,7 +199,11 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     o << "<div id=\"sobre\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
     o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
-    o << "<h4>" << this->genero << "</h4>" << endl;
+    if(this->genero == 'M'){
+        o << "<h4>MASCULINO</h4>" << endl;
+    } else {
+        o << "<h4>FEMININO</h4>" << endl;
+    }
     o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
     o << "<h4>" << this->formacao << "</h4>" << endl;
     o << "</div>" << endl;
@@ -234,8 +237,6 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     {
         this->seguidores[i]->imprimeNoHtmlSeguidor(o);
     }
-    o << "<div style=\"border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;\" class=\"row\">" << endl;
-    o << "</div>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
 }
@@ -251,7 +252,11 @@ void UsuarioComum::imprimeNoHtmlSeguidor(ofstream &o)
     o << "<div id=\"info\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
     o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
-    o << "<h4>" << this->genero << "</h4>" << endl;
+    if(this->genero == 'M'){
+        o << "<h4>MASCULINO</h4>" << endl;
+    } else {
+        o << "<h4>FEMININO</h4>" << endl;
+    }
     o << "<h4>" << this->getStringStatus() << "</h4>" << endl;
     o << "<h4>" << this->formacao << "</h4>" << endl;
     o << "</div>" << endl;

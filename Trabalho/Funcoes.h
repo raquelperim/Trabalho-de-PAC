@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include <locale.h>
+#include <Windows.h>
 #include "RedeSocial.h"
 
 using namespace std;

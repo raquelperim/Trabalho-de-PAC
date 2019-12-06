@@ -33,7 +33,7 @@ vector<RedeSocial*> carregarDadosRedesSociais(ifstream &arqRede)
 }
 int main()
 {
-    setlocale(LC_ALL, "Portuguese");
+    SetConsoleOutputCP(CP_UTF8);
     string catego;
     int a;
     vector<RedeSocial*> redes;
