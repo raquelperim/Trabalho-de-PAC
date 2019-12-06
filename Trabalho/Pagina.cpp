@@ -95,7 +95,7 @@ void Pagina::carregaArquivo(ifstream &arqRed)
     this->data= {0,0,0,d,m-1,a-1900};
     getline(arqRed, ups);
     this->categoria->setNome(ups);
-    arqRed.ignore();
+//    arqRed.ignore();
     getline(arqRed, this->sobre);
     arqRed >> urlll;
     arqRed.ignore();
@@ -169,9 +169,10 @@ void Pagina::imprimeNoHtmlPerfil(ofstream &o)
     o << "<div class=\"bg-img\">" << endl;
     o << "<img src=\"" << this->urlFoto << "\" />" << endl;
     o << "</div>" << endl;
+    o << "</div>" << endl;
     o << "<div id=\"sobre\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
-    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
     o << "<h4>" << this->categoria->getNome() << "</h4>" << endl;
     o << "<h4>" << this->sobre << "</h4>" << endl;
     o << "</div>" << endl;
@@ -219,7 +220,7 @@ void Pagina::imprimeNoHtmlSeguidor(ofstream &o)
     o << "</div>" << endl;
     o << "<div id=\"info\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
-    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
     o << "<h4>" << this->categoria << "</h4>" << endl;
     o << "<h4>" << this->sobre << "</h4>" << endl;
     o << "</div>" << endl;
