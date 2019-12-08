@@ -536,7 +536,7 @@ void RedeSocial::carregaArquivo(ifstream &arqRede)
 void RedeSocial::exportarRedeSocial()
 {
     ofstream o;
-    string nom;
+    string nom,cor;
     nom= this->nome + ".html";
     o.open(nom.c_str());
     o << "<!DOCTYPE html>" << endl;
@@ -558,7 +558,19 @@ void RedeSocial::exportarRedeSocial()
     o << "}" << endl;
     o << "#bar {" << endl;
     o << "height: 50px;" << endl;
-    o << "background: #4267b2;" << endl;
+    if(this->nome == "Alface")
+    {
+        cor= "#20de0b";
+    }
+    else if (this->nome == "Beterraba")
+    {
+        cor= "#850476";
+    }
+    else if(this->nome == "Cenoura")
+    {
+        cor= "#f27c05";
+    }
+    o << "background:" << cor <<";" << endl;
     o << "text-align: center;" << endl;
     o << "}" << endl;
     o << "#perfil {" << endl;
@@ -702,4 +714,9 @@ void RedeSocial::exportarRedeSocial()
     o << "</html>" << endl;
     o.close();
     cout << "O arquivo " << nom << " foi criado com sucesso!" << endl;
+
+
+
+
+
 }

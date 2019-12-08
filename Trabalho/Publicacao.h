@@ -18,6 +18,7 @@ public:
     tm getData();
     void setData(tm data);
     string getConteudo();
+    string getUrl();
     void setConteudo(string conteudo);
     Publicacao();
     Publicacao(string a, string u);

@@ -55,7 +55,7 @@ void Pagina::imprimeNoArquivo(ofstream &o)
     o << this->id << endl;
     o << this->data.tm_mday << "/" <<this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << endl;
     o << this->categoria->getNome() << endl;
-    o << this->sobre << endl;
+    o << this->getSobre()<< endl;
     o << this->getUrlFoto() << endl;
     o << seguidores.size() << endl;
     for(int i=0; i<seguidores.size(); i++)
@@ -76,7 +76,7 @@ void Pagina::imprimeSeguidor(ofstream &o)
     o << this->id << endl;
     o << this->data.tm_mday << "/" <<this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << endl;
     o << this->categoria->getNome() << endl;
-    o << this->sobre << endl;
+    o << this->getSobre() << endl;
     o << this->getUrlFoto() << endl;
     cout << "Seguidor " << this->nome << " salvo com sucesso!" << endl;
 }
@@ -95,7 +95,6 @@ void Pagina::carregaArquivo(ifstream &arqRed)
     this->data= {0,0,0,d,m-1,a-1900};
     getline(arqRed, ups);
     this->categoria->setNome(ups);
-//    arqRed.ignore();
     getline(arqRed, this->sobre);
     arqRed >> urlll;
     arqRed.ignore();
@@ -135,7 +134,7 @@ void Pagina::carregaArquivo(ifstream &arqRed)
 void Pagina::carregaSeguidor(ifstream &arqRed)
 {
     int d,m,a;
-    string oops,urlll;
+    string oops,urlll,sobreee;
     getline(arqRed, this->nome);
     getline(arqRed, this->id);
     arqRed >> d;
@@ -167,14 +166,13 @@ void Pagina::imprimeNoHtmlPerfil(ofstream &o)
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
-    o << "</div>" << endl;
+    o << "<img src=\"" << this->getUrlFoto() << "\" />" << endl;
     o << "</div>" << endl;
     o << "<div id=\"sobre\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
-    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
     o << "<h4>" << this->categoria->getNome() << "</h4>" << endl;
-    o << "<h4>" << this->sobre << "</h4>" << endl;
+    o << "<h4>" << this->getSobre()<< "</h4>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div id=\"publicacoes\">" << endl;
@@ -215,14 +213,14 @@ void Pagina::imprimeNoHtmlSeguidor(ofstream &o)
     o << "<div class=\"row\">" << endl;
     o << "<div id=\"divImage\">" << endl;
     o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "<img src=\"" << this->getUrlFoto() << "\" />" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div id=\"info\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
-    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
-    o << "<h4>" << this->categoria << "</h4>" << endl;
-    o << "<h4>" << this->sobre << "</h4>" << endl;
+    o << "<h4>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h4>" << endl;
+    o << "<h4>" << this->categoria->getNome() << "</h4>" << endl;
+    o << "<h4>" << this->getSobre() << "</h4>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;

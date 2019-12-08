@@ -30,6 +30,10 @@ void Publicacao::setConteudo(string conteudo)
 {
     this->conteudo=conteudo;
 }
+string Publicacao::getUrl()
+{
+    return this->url;
+}
 void Publicacao::imprimeNoArquivo(ofstream &o)
 {
     o<< this->conteudo << endl;
@@ -57,7 +61,7 @@ void Publicacao::imprimirNoHtml(ofstream &o)
     o << "<div class=\"row\">" << endl;
     o << "<div id=\"divImage\">" << endl;
     o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"" << this->url << "\" />" << endl;
+    o << "<img src=\"" << this->getUrl() << "\" />" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div id=\"info\">" << endl;

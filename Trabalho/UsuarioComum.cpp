@@ -126,6 +126,7 @@ void UsuarioComum::carregaArquivo(ifstream &arqRed)
     arqRed.ignore();
     this->setUrlFoto(urlll);
     arqRed >> n; // número de seguidores
+    // aAa
     arqRed.ignore();
     for(int i=0; i<n; i++)
     {
@@ -194,7 +195,7 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "<img src=\"" << this->getUrlFoto() << "\" />" << endl;
     o << "</div>" << endl;
     o << "<div id=\"sobre\">" << endl;
     o << "<h4>" << this->id << "</h4>" << endl;
@@ -243,13 +244,14 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     o << "</div>" << endl;
     o << "</div>" << endl;
 }
+
 void UsuarioComum::imprimeNoHtmlSeguidor(ofstream &o)
 {
     o << "<div id=\"card\">" << endl;
     o << "<div class=\"row\">" << endl;
     o << "<div id=\"divImage\">" << endl;
     o << "<div class=\"bg-img\">" << endl;
-    o << "<img src=\"" << this->urlFoto << "\" />" << endl;
+    o << "<img src=\"" << this->getUrlFoto() << "\" />" << endl;
     o << "</div>" << endl;
     o << "</div>" << endl;
     o << "<div id=\"info\">" << endl;
