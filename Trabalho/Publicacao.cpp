@@ -66,7 +66,7 @@ void Publicacao::imprimirNoHtml(ofstream &o)
     o << "</div>" << endl;
     o << "<div id=\"info\">" << endl;
     o << "<div>" << endl;
-    o << "<h3>" << this->data.tm_mday << "/" << this->data.tm_mon +1 << "/" << this->data.tm_year+1900 << "</h3>" << endl;
+    o << "<h3>" << this->data.tm_mday << "/" << this->data.tm_mon+1 << "/" << this->data.tm_year+1900 << "</h3>" << endl;
     o << "</div>" << endl;
     o << "<h4>" << this->conteudo << "</h4>" << endl;
     o << "</div>" << endl;

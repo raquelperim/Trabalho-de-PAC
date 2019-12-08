@@ -244,7 +244,6 @@ void UsuarioComum::imprimeNoHtmlPerfil(ofstream &o)
     o << "</div>" << endl;
     o << "</div>" << endl;
 }
-
 void UsuarioComum::imprimeNoHtmlSeguidor(ofstream &o)
 {
     o << "<div id=\"card\">" << endl;

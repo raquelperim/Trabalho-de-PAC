@@ -532,7 +532,6 @@ void RedeSocial::carregaArquivo(ifstream &arqRede)
     }
     cout << "Rede social " << this->nome << " carregada com sucesso!" << endl;
 }
-
 void RedeSocial::exportarRedeSocial()
 {
     ofstream o;
@@ -714,9 +713,4 @@ void RedeSocial::exportarRedeSocial()
     o << "</html>" << endl;
     o.close();
     cout << "O arquivo " << nom << " foi criado com sucesso!" << endl;
-
-
-
-
-
 }
