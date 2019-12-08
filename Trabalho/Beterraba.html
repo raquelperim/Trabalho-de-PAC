@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+background-color: rgb(245, 245, 245);
+font-family: 'Roboto', sans-serif;
+margin: 0;
+}
+#divBody {
+justify-content: center;
+margin:auto;
+align-items: center;
+width: 1400px;
+overflow-x: scroll;
+}
+#bar {
+height: 50px;
+background:#850476;
+text-align: center;
+}
+#perfil {
+width: 300px;
+}
+#perfil #sobre {
+text-align: left;
+color: rgba(0, 0, 0, .8);
+background-color: rgb(252, 252, 252);
+border: 1px solid rgb(220, 220, 220);
+margin-left: 19px;
+width: calc(300px - 40px);
+}
+#publicacoes {
+width: 500px;
+margin: 0 auto;
+}
+#seguidores {
+width: 500px;
+margin: 0 auto;
+}
+h1 {
+color: white;
+padding-top: 10px;
+font-size: 26px;
+}
+h2 {
+font-size: 20px;
+margin: 30px auto 10px auto;
+color: rgba(0, 0, 0, .8);
+}
+h3 {
+font-size: 18px;
+margin-left: 20px;
+float: left;
+color: rgba(0, 0, 0, .8);
+}
+h4 {
+font-size: 15px;
+color: rgba(0, 0, 0, .75);
+margin: 10px;
+font-weight: 400;
+}
+.text-center {
+text-align: center;
+}
+.row {
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+margin-left: 0;
+margin-right: 0;
+}
+.col-12 {
+width: 100%;
+}
+#perfil .bg-img{
+text-align: center;
+}
+#perfil .bg-img img, #seguidores .bg-img img {
+border: 1px solid rgb(200, 200, 200);
+width: calc(300px - 40px);
+}
+#card {
+display: table;
+margin: auto;
+}
+#card .row {
+margin-bottom: 20px;
+}
+#card .bg-img{
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+position: relative;
+height: 100%;
+}
+#card .bg-img img{
+background-color: white;
+height: 100%;
+width: 100%;
+border: 1px solid rgb(220, 220, 220);
+}
+#card #divImage{
+position: relative;
+float: left;
+}
+#publicacoes #card #divImage{
+width: 220px;
+height: 180px;
+}
+#seguidores #card #divImage{
+width: 220px;
+height: 210px;
+}
+#card h3{
+color: rgba(0,0,0,0.7);
+font-size: 17px;
+margin: 10px;
+padding-bottom: 5px;
+border-bottom: 1px solid lightgray;
+width: calc(100% - 20px);
+}
+#card #info{
+border: 1px solid rgb(220, 220, 220);
+background-color: white;
+position: relative;
+float: left;
+}
+#publicacoes #card #info{
+width: 275px;
+height: 180px;
+}
+#seguidores #card #info{
+width: 275px;
+height: 210px;
+}
+#card .info h4{
+color: black;
+font-size: 16px;
+line-height: 1em;
+padding: 7px 0;
+}
+</style>
+<title>Beterraba</title>
+</head>
+<body>
+<div id="bar">
+<h1>Beterraba</h1>
+</div>
+<div id="divBody">
+<div class="row">
+<div class="col-12 text-center">
+<h2>Gabrielly (Usuário Comum)</h2>
+</div>
+<div id="perfil">
+<div class="row">
+<div class="col-12">
+<h3>Perfil</h3>
+</div>
+</div>
+<div class="bg-img">
+<img src="https://www.leiagora.com.br/imgsite/noticias/amp-stalker.jpg" />
+</div>
+<div id="sobre">
+<h4>@gabrielly</h4>
+<h4>21/7/2000</h4>
+<h4>Feminino</h4>
+<h4>Namorando</h4>
+<h4>Stalker Profissional</h4>
+</div>
+</div>
+<div id="publicacoes">
+<div class="row">
+<div class="col-12">
+<h3>Publicações</h3>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://i.ibb.co/N7dSnPk/programacao-professor.jpg" />
+</div>
+</div>
+<div id="info">
+<div>
+<h3>6/12/2019</h3>
+</div>
+<h4>Stalkeei o professor de programacao, hoje fui produtiva :)</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="seguidores">
+<div class="row">
+<div class="col-12">
+<h3>Seguidores</h3>
+</div>
+</div>
+<h4 style="font-style: italic; text-decoration: underline;"> Nenhum seguidor até o momento!</h4>
+</div>
+</div>
+<div style="border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;" class="row">
+</div>
+<div class="row">
+<div class="col-12 text-center">
+<h2>Pinto (Usuário Comum)</h2>
+</div>
+<div id="perfil">
+<div class="row">
+<div class="col-12">
+<h3>Perfil</h3>
+</div>
+</div>
+<div class="bg-img">
+<img src="https://4.bp.blogspot.com/-PedoYQCdFnY/Wh7XgcZrIRI/AAAAAAAAAgY/y5_UDlyHpqEfGjupJwF-2Ckrfz9Gi47HQCLcBGAs/s1600/cats.jpg" />
+</div>
+<div id="sobre">
+<h4>@pinto2</h4>
+<h4>12/12/1999</h4>
+<h4>Masculino</h4>
+<h4>Solteiro(a)</h4>
+<h4>Conoisseur de Vestidos</h4>
+</div>
+</div>
+<div id="publicacoes">
+<div class="row">
+<div class="col-12">
+<h3>Publicações</h3>
+</div>
+</div>
+<h4 style="font-style: italic; text-decoration: underline;"> Nenhuma publicação até o momento!</h4>
+</div>
+<div id="seguidores">
+<div class="row">
+<div class="col-12">
+<h3>Seguidores</h3>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://www.leiagora.com.br/imgsite/noticias/amp-stalker.jpg" />
+</div>
+</div>
+<div id="info">
+<h4>@gabrielly</h4>
+<h4>21/7/2000</h4>
+<h4>Feminino</h4>
+<h4>Namorando</h4>
+<h4>Stalker Profissional</h4>
+</div>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://cdn.awsli.com.br/600x1000/397/397810/produto/29101398/c1e1833e57.jpg" />
+</div>
+</div>
+<div id="info">
+<h4>@VestidosMacaquinhoLovers</h4>
+<h4>6/12/2019</h4>
+<h4>Roupas</h4>
+<h4>Amamos Vestido e Macaquinhos com todas as forcas</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;" class="row">
+</div>
+<div class="row">
+<div class="col-12 text-center">
+<h2>Apreciadores de Vestido e Macaquinhos (Página)</h2>
+</div>
+<div id="perfil">
+<div class="row">
+<div class="col-12">
+<h3>Perfil</h3>
+</div>
+</div>
+<div class="bg-img">
+<img src="https://cdn.awsli.com.br/600x1000/397/397810/produto/29101398/c1e1833e57.jpg" />
+</div>
+<div id="sobre">
+<h4>@VestidosMacaquinhoLovers</h4>
+<h4>6/12/2019</h4>
+<h4>Roupas</h4>
+<h4>Amamos Vestido e Macaquinhos com todas as forcas</h4>
+</div>
+</div>
+<div id="publicacoes">
+<div class="row">
+<div class="col-12">
+<h3>Publicações</h3>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://chicprincess.com.br/image/cache/catalog/demo/product/macaquinho/macaquinho%20-%2011/macaquinho-feminino-curto-geometrico%20(3)-500x612.jpg" />
+</div>
+</div>
+<div id="info">
+<div>
+<h3>6/12/2019</h3>
+</div>
+<h4>Eu morreria por macaquinhos e vestidos</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="seguidores">
+<div class="row">
+<div class="col-12">
+<h3>Seguidores</h3>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://www.leiagora.com.br/imgsite/noticias/amp-stalker.jpg" />
+</div>
+</div>
+<div id="info">
+<h4>@gabrielly</h4>
+<h4>21/7/2000</h4>
+<h4>Feminino</h4>
+<h4>Namorando</h4>
+<h4>Stalker Profissional</h4>
+</div>
+</div>
+</div>
+<div id="card">
+<div class="row">
+<div id="divImage">
+<div class="bg-img">
+<img src="https://4.bp.blogspot.com/-PedoYQCdFnY/Wh7XgcZrIRI/AAAAAAAAAgY/y5_UDlyHpqEfGjupJwF-2Ckrfz9Gi47HQCLcBGAs/s1600/cats.jpg" />
+</div>
+</div>
+<div id="info">
+<h4>@pinto2</h4>
+<h4>12/12/1999</h4>
+<h4>Masculino</h4>
+<h4>Solteiro(a)</h4>
+<h4>Conoisseur de Vestidos</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="border-bottom: 1px solid rgb(215, 215, 215); margin-top: 30px;" class="row">
+</div>
+</div>
+</div>
+</body>
+</html>
